@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students list</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="./script.js"></script>
+  </head>
+
+  <body>
+    <section class="section-main">
+      <div class="container">
+        <h1 class="header">Список студентов</h1>
+        <div class="buttons__wrap mb-4">
+          <button type="button" class="btn btn-outline-dark add__btn">
+            Добавить
+          </button>
+          <button type="button" class="btn btn-outline-dark find__btn">
+            Найти
+          </button>
+        </div>
+
+        <form class="row gx-3 align-items-center add-form">
+          <div class="col-auto col-md-6">
+            <label>Фамилия</label>
+            <input
+              type="text"
+              class="form-control add-form__input"
+              id="surname"
+              placeholder="Иванов"
+            />
+            <div class="alert"></div>
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Имя</label>
+            <input
+              type="text"
+              class="form-control add-form__input"
+              id="name"
+              placeholder="Иван"
+            />
+            <div class="alert"></div>
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Отчество</label>
+            <input
+              type="text"
+              class="form-control add-form__input"
+              id="middlename"
+              placeholder="Иванович"
+            />
+            <div class="alert"></div>
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Дата рождения</label>
+            <input
+              type="date"
+              class="form-control add-form__input"
+              id="birthdate"
+              min="1900-01-01"
+              max="2100-12-31"
+            />
+            <div class="alert"></div>
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Год поступления</label>
+            <input
+              type="tel"
+              class="form-control add-form__input"
+              id="year-of-admission"
+              placeholder="2020"
+              maxlength="4"
+            />
+            <div class="alert"></div>
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Факультет:</label>
+            <select class="form-select" id="faculty">
+              <option value="0">Биологический факультет</option>
+              <option value="1">Физико-технический факультет</option>
+              <option value="2">Юридический факультет</option>
+              <option value="3">Экономический факультет</option>
+            </select>
+            <div class="alert"></div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-dark col-md-4 mb-4 mt-1 mx-auto submit__btn"
+          >
+            Отправить
+          </button>
+        </form>
+      </div>
+    </section>
+    <section class="section-modal">
+      <div class="verify-modal col-md-12 list-group align-items-space-between">
+        <div class="data-checking"></div>
+        <div class="btn-group-sm mx-auto mt-auto">
+          <button class="btn btn-dark accept__btn">Подтвердить</button>
+          <button class="btn btn-secondary return__btn">Исправить</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-search">
+      <div class="container">
+        <form
+          class="row gy-3 gx-3 justify-content-center align-items-center search-form"
+        >
+          <div class="col-auto col-md-6">
+            <label>ФИО</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Иванов Иван Иванович"
+              id="search-fullname"
+            />
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Факультет</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Биологический факультет"
+              id="search-faculty"
+            />
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Год начала обучения</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="2020"
+              id="search-year-of-admission"
+            />
+          </div>
+          <div class="col-auto col-md-6">
+            <label>Год окончания обучения</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="2024"
+              id="search-year-of-graduation"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-dark search__btn col-md-4 mx-auto mt-4 mb-1"
+          >
+            Поиск
+          </button>
+        </form>
+        <div
+          class="search-alert justify-content-center col-md-12 mt-3"
+          role="alert"
+        >
+          Совпадений не найдено!
+        </div>
+      </div>
+    </section>
+
+    <section class="section-table">
+      <div class="container">
+        <table
+          class="table table-responsive table-light table-bordered border-secondary table-striped"
+          id="sortable"
+        >
+          <thead class="table-dark">
+            <tr>
+              <th scope="col" data-name="fullname">ФИО</th>
+              <th scope="col" data-name="faculty">Факультет</th>
+              <th scope="col" data-name="age">Дата рождения и возраст</th>
+              <th scope="col" data-name="year of study">
+                Годы обучения и номер курса
+              </th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>
